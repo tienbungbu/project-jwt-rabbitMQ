@@ -1,0 +1,23 @@
+https://lcdung.top/apache-kafka-la-gi/
+
+Apache Kafka là distributed event streaming platform có khả năng xử lý hàng nghìn tỷ sự kiện mỗi ngày. 
+Ban đầu được hình thành như một hàng đợi nhắn tin, Kafka dựa trên sự trừu tượng của nhật ký cam kết phân tán. 
+Kể từ khi được tạo và mở bởi LinkedIn vào năm 2011, 
+Kafka đã nhanh chóng phát triển từ hàng đợi nhắn tin đến một nền tảng phát trực tuyến sự kiện đầy đủ.
+
+Kafka là dự án mã nguồn mở, đã được đóng gói hoàn chỉnh, khả năng chịu lỗi cao và là hệ thống nhắn tin nhanh. Vì tính đáng tin cậy của nó, kafka đang dần được thay thế cho hệ thống nhắn tin truyền thống. Nó được sử dụng cho các hệ thống nhắn tin thông thường trong các ngữ cảnh khác nhau. Đây là hệ quả khi khả năng mở rộng ngang và chuyển giao dữ liệu đáng tin cậy là những yêu cầu quan trọng nhất. Một vài use case cho kafka:
+
+Website Activity Monitoring: theo dõi hoạt động của website
+Stream Processing: xử lý stream
+Log Aggregation: tổng hợp log
+Metrics Collection: thu thập dữ liệu
+
+cấu trúc của kafka bao gồm các thành phần chính sau:
+
+Producer: Một producer có thể là bất kì ứng dụng nào có chức năng publish message vào một topic.
+Messages: Messages đơn thuần là byte array và developer có thể sử dụng chúng để lưu bất kì object với bất kì format nào – thông thường là String, JSON và Avro
+Topic: Một topic là một category hoặc feed name nơi mà record được publish.
+Partitions: Các topic được chia nhỏ vào các đoạn khác nhau, các đoạn này được gọi là partition
+Consumer: Một consumer có thể là bất kì ứng dụng nào có chức năng subscribe vào một topic và tiêu thụ các tin nhắn.
+Broker: Kafka cluster là một set các server, mỗi một set này được gọi là 1 broker
+Zookeeper: được dùng để quản lý và bố trí các broker.

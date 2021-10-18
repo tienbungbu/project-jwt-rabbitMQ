@@ -1,0 +1,28 @@
+https://topdev.vn/blog/message-queue-la-gi/
+
+Message Queue là một thành phần quan trọng thường sử dụng trong các hệ thống lớn (Ví dụ Yahoo, Tiki) hoặc phần mềm theo kiến trúc microservice.
+
+Message Queue nôm na là Queue (hàng đợi), chứa Message (Tin nhắn) như hộp thư 😀 Và nó cho phép các thành phần/service trong một hệ thống (hoặc nhiều hệ thống), 
+trao đổi thông tin cho nhau.
+
+Ý nghĩa của queue (hàng đợi) là nó thực hiện việc lấy message theo cơ chế vào trước thì ra trước ( First In First Out ).
+
+Một hệ thống Message Queue thường có những thành phần sau:
+
+Message: Thông tin được gửi (có thể là text, binary hoặc JSON)
+Message Queue: Nơi chứa những message này, cho phép producer và consumer có thể trao đổi với nhau
+Producer: Service tạo ra thông tin, đưa thông tin vào message queue
+Consumer: Service nhận message từ message queue và xử lý
+Một service có thể vừa làm producer, vừa làm consumer 
+Một số Message queue được dùng hiện nay:
+
+Kafka
+Pulsar
+RabitMQ
+ActiveMQ
+SQS
+ZeroMQ
+MSMQ
+IronMQ
+Kinesis
+RocketMQ

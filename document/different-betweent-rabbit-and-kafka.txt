@@ -1,0 +1,38 @@
+https://dodangquan.blogspot.com/2018/10/rabbitmq-va-kafka-phan-1-hai-he-thong-truyen-tin-khac-nhau.html
+
+https://nextlint.com/technology/tan-man-ve-he-thong-messaging-kafka-rabbitmq-00439d90948b
+
+==========================================================================================================
+
+RabbitMQ có cách tiếp cận truyền thông điệp vừa truyền thống và cũng rất mới mẻ. 
+Truyền thống là bởi nó được định hướng xung quanh các hàng đợi thông điệp, còn mới ở đây là khả năng định tuyến rất linh hoạt của nó. 
+Khả năng định tuyến này là tính năng nổi bật nhất của RabbitMQ. Việc xây dựng một hệ thống truyền thông điệp phân tán nhanh, 
+có khả năng mở rộng cao, và đáng tin cậy là một trong những điều đáng chú ý của RabbitMQ, 
+tuy nhiên khả năng định tuyến thông điệp linh hoạt mới là điều làm cho RabbitMQ thực sự nổi bật trong vô số các công nghệ truyền thông điệp hiện nay.
+
+Apache Kafka
+Kafka là hệ thống nhân rộng commit log phân tán. Kafka không có khái niệm về một hàng đợi có vẻ lạ lẫm lúc đầu vì nó được 
+sử dụng chính như một hệ thống truyền thông điệp. Hàng đợi đã được đồng nghĩa với hệ thống truyền thông điệp trong một thời gian dài:
+Phân tán: vì Kafka được triển khai dưới dạng một cụm các node, cho cả khả năng chịu lỗi và khả năng mở rộng
+Nhân rộng: vì các thông điệp thường được nhân rộng trên nhiều node (máy chủ).
+Commit Log: vì các thông điệp được lưu trữ trong phân vùng (partitioned), và chỉ nối thêm log vào cuối, 
+khái niệm về nối thêm log này chính là tính năng nổi bật nhất của Kafka.
+
+
+======================================
+So sánh và phân biệt
+======================================
+------Nếu hệ thống của bạn không cần lưu trữ message, ưu tiên cho việc đòi hỏi sự đảm bảo rằng các consumer đều nhận được message và duy nhất bên cạnh độ
+ưu tiên của từng message thì dạng messaging truyền thống như RabbitMQ sẽ thực sự hữu dụng.
+------Nếu hệ thống của bạn đòi hỏi về mặt lưu trữ và tốc độ truyền tải message. Consumer muốn lựa chọn số lượng message mình cần, có thể lấy theo thứ
+ tự hoặc muốn lấy từ lúc bắt đầu, một consumer có thể nhận đi nhận lại nhiều lần message đấy. Lúc này đây, hệ thông messaging dạng pipeline 
+như Kafka sẽ được tin dùng. Có thể kể đến một số user cases như: Stream Processing, Event sourcing,..
+
+Ta đã đề cập đến việc cả RabbitMQ và Kafka có thể scale-out và duy trì thứ tự thông điệp, nhưng Kafka sẽ thực hiện dễ dàng hơn rất nhiều. Với RabbitMQ, chúng ta bắt buộc phait sử dụng Consistent Hashing Exchange và thực hiện logic thủ 
+công trong Consumer bằng cách sử dụng một service đồng thuận phân tán như ZooKeeper hoặc Consul.
+Tuy nhiên, RabbitMQ có một khả năng thú vị mà Kafka không có đó là cho phép các Subscriber sắp xếp các nhóm sự kiện tùy ý.
+Các ứng dụng khác nhau không thể chia sẻ một Queue bởi vì chúng sẽ cạnh tranh nhau để tiêu thụ các thông điệp. Chúng cần các hàng đợi riêng. Điều này cho phép các ứng dụng tự do trong việc cấu hình các hàng đợi sao cho phù hợp nhất. Chúng có thể định tuyến nhiều loại sự kiện từ nhiều Topic đến các hàng đợi. Điều này cho phép các ứng dụng duy trì được thứ tự của các sự kiện có liên quan. 
+Các nhóm event có thể được cấu hình kết hợp lại theo các cách khác nhau đối với từng ứng dụng.
+Điều này lại là không thể với một hệ thống thông điệp dựa vào log giống như Kafka, vì log là tài nguyên được chia sẻ. Nhiều ứng dụng sẽ đọc từ cùng một log. Vì vậy, việc thực hiện nhóm các sự kiện liên quan lại với nhau vào trong một Topic duy nhất sẽ phải được thực hiện ở mức kiến ​​trúc hệ thống tông quan hơn.
+
+Tổng kết, chúng ta nên lựa chọn hệ thống messaging phù hợp với nhu cầu và mục đích của hệ thống mình mong muốn. Đôi khi chúng ta cũng sẽ sử dụng cả hai loại trên để tận dụng tối đa các ưu điểm của từng loại.

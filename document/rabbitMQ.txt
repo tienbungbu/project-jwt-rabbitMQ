@@ -1,0 +1,33 @@
+https://topdev.vn/blog/rabbitmq-la-gi/
+==============================================
+
+RabbitMQ là gì?
+RabbitMQ là một AMQP message broker hay còn gọi là phần mềm quản lý hàng đợi message. 
+Nói đơn giản, đây là phần mềm định nghĩa hàng đợi một ứng dụng khác có thể kết nối đến để bỏ message vào và gửi message dựa trên nó.
+
+Message broker là gì?
+Message broker là một chương trình trung gian được thiết kế để validating, 
+transforming và routing messages. Chúng phục vụ các nhu cầu giao tiếp giữa các ứng dụng với nhau.
+
+Với Message broker, ứng dụng nguồn (producer) gửi một message đến một server process mà nó có thể cung cấp việc sắp xếp dữ liệu, 
+routing (Định tuyến), message translation, persistence và delivery tất cả các điểm đến thích hợp (consumer).
+
+Có 2 hình thức giao tiếp cơ bản với một Message Broker:
+
+Publish và Subscribe (Topics)
+Point-to-Point (Queues)
+
+Khi nào và tại sao dùng RabbitMQ
+RabbitMQ giúp các web server gửi các reponse cho các request rất nhanh thay vì bị ép buộc chạy một procedure ngốn tài nguyên trên một hệ thống. 
+Việc đưa message vào hàng đợi là một giải pháp hay khi ta muốn phân tán message cho nhiều người nhận giúp giảm tải cho các worker xử lý.
+
+VD như user được phép tạo file PDF cho mẫu cv it từ phần mềm tạo CV Online của TopDev, bài toán là khi hàng nghìn user cùng nhấp vào nút tạo PDF, 
+lúc này server nhận rất nhiều request sẽ gây ra vài vấn đề như chậm, quá tải, thậm chí không tạo được file PDF do nghẽn…
+lúc này chúng ta cần dùng RabbitMQ để đẩy các request này vào hàng chờ. Cơ chế như sau:
+
+Một consumer lấy message từ hàng đợi và bắt đầu xử lý PDF trong lúc với một producer đang bỏ thêm những message mới vào trong hàng đợi. 
+Một request có thể được tạo bằng ngôn ngữ này và xử lý bằng một ngôn ngữ khác. Hai ứng dụng trao đổi với nhau qua các message. 
+Do đó, hai ứng dụng gửi và nhận sẽ có độ ràng buộc thấp.
+
+Kết luận RabbitMQ
+RabbitMQ là một cách hay để triển khai các ứng dụng nhắn tin
